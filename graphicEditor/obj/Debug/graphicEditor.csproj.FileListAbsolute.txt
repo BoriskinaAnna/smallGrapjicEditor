@@ -18,3 +18,5 @@ D:\4 сем\ооп\1\graphicEditor\graphicEditor\obj\Debug\graphicEditor.csproj.
 D:\4 сем\ооп\1\graphicEditor\graphicEditor\obj\Debug\graphicEditor.csproj.CoreCompileInputs.cache
 D:\4 сем\ооп\1\graphicEditor\graphicEditor\obj\Debug\graphicEditor.exe
 D:\4 сем\ооп\1\graphicEditor\graphicEditor\obj\Debug\graphicEditor.pdb
+D:\4 сем\ооп\1\graphicEditor\graphicEditor\bin\Debug\Shape.dll
+D:\4 сем\ооп\1\graphicEditor\graphicEditor\bin\Debug\Shape.pdb

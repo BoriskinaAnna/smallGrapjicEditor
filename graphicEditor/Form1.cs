@@ -1,45 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
-using System.IO;
+using Shape;
 
+using System.IO;
+using System.Reflection;
 
 namespace graphicEditor
 {
     
     public partial class Lab1 : Form
     {
-
-      
         public static List<versionOfShape> allShapes = new List<versionOfShape>();
-      
-     
         public static Point[] point = new Point[0];
-
         public static Bitmap bitmapMain, bitmapSecondary;
-    
         public static Pen pen = new Pen(Color.Black);
 
         public static int selectedShapesNumber = -1;
         public static Point[] selectRectangle;
-       
-      
+        public static IResizable myEllipce = null;
+        public static IResizable myRectangle = null;
+        public static IResizable myCircle = null;
+        public static IResizable mySquare = null;
+        public static IResizable myTriangle = null;
+        public static IResizable myLine = null;
         private Point currentMouseDown;
 
         bool isChanged = false;
-        public static Shape shape;
+        public static Shape.Shape shape;
 
 
         public struct versionOfShape
         {
             public bool isCurrentVersion;
             public int prevVersionIndex; 
-            public  List<Shape> list;
+            public  List<Shape.Shape> list;
             public int count;
         }
 
+
+
+        private IResizable GetObject(String libraryName)
+        {
+            IResizable shape = null;
+            String AboutLibName = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), libraryName);
+            if (File.Exists(AboutLibName))
+            {
+                ///Загружаем сборку
+                Assembly AboutAssembly = Assembly.LoadFrom(AboutLibName);
+
+                ///в цикле проходим по всем public-типам сборки
+                foreach (Type t in AboutAssembly.GetExportedTypes())
+                {
+                    ///если это класс,который реализует интерфейс IAboutInt,
+                    ///то это то,что нам нужно Smile
+                    if (t.IsClass && typeof(IResizable).IsAssignableFrom(t))
+                    {
+                        ///создаем объект полученного класса
+                        shape = (IResizable)Activator.CreateInstance(t);
+
+                        ///вызываем его метод GetAboutText
+
+                        break;
+                    }
+                }
+            }
+            return shape;
+
+        }
 
 
         public Lab1()
@@ -49,6 +78,13 @@ namespace graphicEditor
       
             bitmapMain = new Bitmap(drawField.Width, drawField.Height);
             bitmapSecondary = new Bitmap(drawField.Width, drawField.Height);
+            myEllipce = GetObject("MyEllipce.dll");
+            myRectangle = GetObject("MyRectangle.dll");
+            myCircle = GetObject("MyCircle.dll");
+            mySquare = GetObject("MySquare.dll");
+            myTriangle = GetObject("MyTriangle.dll");
+            myLine = GetObject("MyLine.dll");
+
         }
 
         private void Selection()
@@ -84,15 +120,18 @@ namespace graphicEditor
                     Point[] points = { (new Point(Math.Min(allShapes[selectedShapesNumber].list[0].point[0].X, Math.Min(allShapes[selectedShapesNumber].list[0].point[1].X, allShapes[selectedShapesNumber].list[0].point[2].X)) - 10, Math.Min(allShapes[selectedShapesNumber].list[0].point[0].Y, Math.Min(allShapes[selectedShapesNumber].list[0].point[1].Y, allShapes[selectedShapesNumber].list[0].point[2].Y)) - 10)), (new Point(Math.Max(allShapes[selectedShapesNumber].list[0].point[0].X, Math.Max(allShapes[selectedShapesNumber].list[0].point[1].X, allShapes[selectedShapesNumber].list[0].point[2].X)) + 10, Math.Max(allShapes[selectedShapesNumber].list[0].point[0].Y, Math.Max(allShapes[selectedShapesNumber].list[0].point[1].Y, allShapes[selectedShapesNumber].list[0].point[2].Y)) + 10)) };
                     point = points;
                 }
-
-                MyRectangle currentShape = new MyRectangle(selectPen);
-                currentShape.Draw(bitmapMain, point, false);
+              
+                Graphics g;
+                g = Graphics.FromImage(bitmapMain);
+                Rectangle rectangle = new Rectangle(point[0].X, point[0].Y, point[1].X - point[0].X, point[1].Y - point[0].Y);
+                g.DrawRectangle(selectPen, rectangle);
                 drawField.Image = bitmapMain;
                 selectRectangle = new Point[point.Length];
                 selectRectangle[0].X = point[0].X;
                 selectRectangle[0].Y = point[0].Y;
                 selectRectangle[1].X = point[1].X;
                 selectRectangle[1].Y = point[1].Y;
+                
 
             }
 
@@ -100,10 +139,10 @@ namespace graphicEditor
 
        
 
-        public static void AddNewShapeToList(Shape shape)
+        public static void AddNewShapeToList(Shape.Shape shape)
         {
             versionOfShape subListAllShapes ;
-            subListAllShapes.list = new List<Shape>();
+            subListAllShapes.list = new List<Shape.Shape>();
             subListAllShapes.count = 1;
             subListAllShapes.list.Add(shape);
             subListAllShapes.prevVersionIndex = -1;
@@ -111,37 +150,45 @@ namespace graphicEditor
             allShapes.Add(subListAllShapes);
         }
 
-        public static Shape CreateNewShape(string shapeName, Point[] pointLocal, Pen pen)
+        public static Shape.Shape CreateNewShape(string shapeName, Point[] pointLocal, Pen pen)
         {
+            shape = null;
             ShapeFactory shapeFactory;
             switch (shapeName)
             {
                 case "Triangle":
                 case "MyTriangle":
                     {
-                        if (pointLocal.Length != 3)
+                        if (myTriangle != null)
                         {
-                            shapeFactory = new TriangleFactory();
-                             shape = shapeFactory.CreateNewShape();
+                            if (pointLocal.Length != 3)
+                            {
+                                shapeFactory = new TriangleFactory();
+                                shape = shapeFactory.CreateNewShape();
+                            }
+                            else
+                            {
+                                shape = myTriangle.Initialization(pointLocal, pen);
+                            }
                         }
-                        else
-                        {
-                            shape = new MyTriangle(pointLocal, pen.Color, pen.Width);
-                        }
+                        
 
                         break;
                     }
                 case "Rectangle":
                 case "MyRectangle":
                     {
-                        if (pointLocal.Length != 2)
+                        if (myRectangle != null)
                         {
-                            shapeFactory = new RectangleFactory();
-                            shape = shapeFactory.CreateNewShape();
-                        }
-                        else
-                        {
-                            shape = new MyRectangle(pointLocal, pen.Color, pen.Width);
+                            if (pointLocal.Length != 2)
+                            {
+                                shapeFactory = new RectangleFactory();
+                                shape = shapeFactory.CreateNewShape();
+                            }
+                            else
+                            {
+                                shape = myRectangle.Initialization(pointLocal, pen);
+                            }
                         }
                         break;
                     }
@@ -149,29 +196,37 @@ namespace graphicEditor
                 case "Ellipce":
                 case "MyEllipce":
                     {
-                        if (pointLocal.Length != 2)
+                        if (myEllipce != null)
                         {
-                            shapeFactory = new EllipceFactory();
-                            shape = shapeFactory.CreateNewShape();
+                            if (pointLocal.Length != 2)
+                            {
+                                shapeFactory = new EllipceFactory();
+                                shape = shapeFactory.CreateNewShape();
+                            }
+                            else
+                            {
+                                // shape = new MyEllipce(pointLocal, pen.Color, pen.Width);
+                                shape = myEllipce.Initialization(pointLocal, pen);
+                            }
                         }
-                        else
-                        {
-                            shape = new MyEllipce(pointLocal, pen.Color, pen.Width);
-                        }
+                       
                         break;
                     }
 
                 case "Line":
                 case "MyLine":
                     {
-                        if (pointLocal.Length != 2)
+                        if (myLine != null)
                         {
-                            shapeFactory = new LineFactory();
-                            shape = shapeFactory.CreateNewShape();
-                        }
-                        else
-                        {
-                            shape = new MyLine(pointLocal, pen.Color, pen.Width);
+                            if (pointLocal.Length != 2)
+                            {
+                                shapeFactory = new LineFactory();
+                                shape = shapeFactory.CreateNewShape();
+                            }
+                            else
+                            {
+                                shape = myLine.Initialization(pointLocal, pen);
+                            }
                         }
                         break;
                     }
@@ -179,14 +234,17 @@ namespace graphicEditor
                 case "Circle":
                 case "MyCircle":
                     {
-                        if (pointLocal.Length != 2)
+                        if (myCircle != null)
                         {
-                            shapeFactory = new CircleFactory();
-                            shape = shapeFactory.CreateNewShape();
-                        }
-                        else
-                        {
-                            shape = new MyCircle(pointLocal, pen.Color, pen.Width);
+                            if (pointLocal.Length != 2)
+                            {
+                                shapeFactory = new CircleFactory();
+                                shape = shapeFactory.CreateNewShape();
+                            }
+                            else
+                            {
+                                shape = myCircle.Initialization(pointLocal, pen);
+                            }
                         }
                         break;
                     }
@@ -194,14 +252,17 @@ namespace graphicEditor
                 case "Square":
                 case "MySquare":
                     {
-                        if (pointLocal.Length != 2)
+                        if (mySquare != null)
                         {
-                            shapeFactory = new SquareFactory();
-                            shape = shapeFactory.CreateNewShape();
-                        }
-                        else
-                        {
-                            shape = new MySquare(pointLocal, pen.Color, pen.Width);
+                            if (pointLocal.Length != 2)
+                            {
+                                shapeFactory = new SquareFactory();
+                                shape = shapeFactory.CreateNewShape();
+                            }
+                            else
+                            {
+                                shape = mySquare.Initialization(pointLocal, pen);
+                            }
                         }
                         break;
                     }
@@ -211,7 +272,7 @@ namespace graphicEditor
         }
 
 
-        private int FindDistance(Shape shape, int x, int y)
+        private int FindDistance(Shape.Shape shape, int x, int y)
         {
             int tempDistance = (int)(Math.Pow(Math.Pow(Math.Abs(shape.center.X - x), 2) + Math.Pow(Math.Abs(shape.center.Y - y), 2), 0.5));
             return tempDistance;
@@ -272,7 +333,7 @@ namespace graphicEditor
             if (shapeComboBox.Text != "Mouse")
             {
                 shape = CreateNewShape(shapeComboBox.Text,  point, pen);
-                if((shape.GetType().Name == "MyTriangle" && point.Length == 3)||(shape.GetType().Name != "MyTriangle" && point.Length == 2) && shape != null)
+                if( shape != null && ((shape.GetType().Name == "MyTriangle" && point.Length == 3)||(shape.GetType().Name != "MyTriangle" && point.Length == 2) ))
                     AddNewShapeToList(shape);
             }
             else
@@ -303,7 +364,7 @@ namespace graphicEditor
         }
        
 
-        private Shape ChangeShapeProperties(string shapeName, Point[] pointLocal, Color color, float brushWidth)
+        private Shape.Shape ChangeShapeProperties(string shapeName, Point[] pointLocal, Color color, float brushWidth)
         {
             if (shape != null)
             {
@@ -418,7 +479,7 @@ namespace graphicEditor
         }
 
 
-        private Shape GetShapeForChanging()
+        private Shape.Shape GetShapeForChanging()
         {
             Point[] helpPoint = new Point[allShapes[selectedShapesNumber].list[0].point.Length];
             for (int i = 0; i < helpPoint.Length; i++)
@@ -437,7 +498,7 @@ namespace graphicEditor
                     newVersionOfShape.count = 1;
                     newVersionOfShape.prevVersionIndex = selectedShapesNumber;
                     newVersionOfShape.isCurrentVersion = true;
-                    newVersionOfShape.list = new List<Shape>();
+                    newVersionOfShape.list = new List<Shape.Shape>();
                     allShapes.Add(newVersionOfShape);
                     selectedShapesNumber = allShapes.Count - 1;
                     ChangeCountInVersionStract(allShapes[selectedShapesNumber].count - 1, selectedShapesNumber);

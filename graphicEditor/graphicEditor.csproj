@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Shape">
+      <HintPath>..\Shape\Shape\bin\Debug\Shape.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -51,16 +54,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="IResizable.cs" />
-    <Compile Include="MyCircle.cs" />
-    <Compile Include="MyEllipce.cs" />
-    <Compile Include="MyLine.cs" />
-    <Compile Include="MyRectangle.cs" />
-    <Compile Include="MySquare.cs" />
-    <Compile Include="MyTriangle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shape.cs" />
     <Compile Include="ShapeFactory.cs" />
     <Compile Include="MyTxtFileStream.cs" />
     <EmbeddedResource Include="Form1.resx">
