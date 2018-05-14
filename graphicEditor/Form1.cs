@@ -19,12 +19,13 @@ namespace graphicEditor
 
         public static int selectedShapesNumber = -1;
         public static Point[] selectRectangle;
-        public static IResizable myEllipce = null;
-        public static IResizable myRectangle = null;
-        public static IResizable myCircle = null;
-        public static IResizable mySquare = null;
-        public static IResizable myTriangle = null;
-        public static IResizable myLine = null;
+        public static IResizable myEllipce;
+        public static IResizable myRectangle;
+        public static IResizable myLine;
+        public static IResizable myTriangle;
+        public static IResizable mySquare;
+        public static IResizable myCircle;
+
         private Point currentMouseDown;
 
         bool isChanged = false;
@@ -69,6 +70,7 @@ namespace graphicEditor
             return shape;
 
         }
+        static List<IResizable> shapes = new List<IResizable>();
 
 
         public Lab1()
@@ -78,12 +80,24 @@ namespace graphicEditor
       
             bitmapMain = new Bitmap(drawField.Width, drawField.Height);
             bitmapSecondary = new Bitmap(drawField.Width, drawField.Height);
-            myEllipce = GetObject("MyEllipce.dll");
-            myRectangle = GetObject("MyRectangle.dll");
-            myCircle = GetObject("MyCircle.dll");
-            mySquare = GetObject("MySquare.dll");
-            myTriangle = GetObject("MyTriangle.dll");
-            myLine = GetObject("MyLine.dll");
+            string path = "D:\\4 сем\\ооп\\1\\graphicEditor\\graphicEditor\\bin\\Debug";
+            string[] dirs = Directory.GetFiles(path);
+            for (int i = 0; i < dirs.Length; i++)
+            {
+                if (dirs[i].Contains(".dll")){
+                    IResizable myObject = GetObject(dirs[i]);
+                    if (myObject != null)
+                    {
+                        shapes.Add(myObject);
+                        shapeComboBox.Items.Add(myObject.GetType().Name);
+                    }
+                        
+
+                }
+            }
+            
+
+           
 
         }
 
@@ -150,120 +164,70 @@ namespace graphicEditor
             allShapes.Add(subListAllShapes);
         }
 
+        static IResizable GetObjectFromLibrary(string typeName)
+        {
+            for (int i = 0; i < shapes.Count; i++)
+            {
+                if (shapes[i].GetType().Name == typeName)
+                {
+                    return shapes[i];
+                }
+            }
+            return null;
+        }
+
         public static Shape.Shape CreateNewShape(string shapeName, Point[] pointLocal, Pen pen)
         {
             shape = null;
-            ShapeFactory shapeFactory;
+            IResizable myObject;
             switch (shapeName)
             {
                 case "Triangle":
                 case "MyTriangle":
                     {
-                        if (myTriangle != null)
-                        {
-                            if (pointLocal.Length != 3)
-                            {
-                                shapeFactory = new TriangleFactory();
-                                shape = shapeFactory.CreateNewShape();
-                            }
-                            else
-                            {
-                                shape = myTriangle.Initialization(pointLocal, pen);
-                            }
-                        }
-                        
-
+                        myObject = GetObjectFromLibrary("MyTriangle");
+                        shape = myObject.Initialization(pointLocal, pen);
                         break;
                     }
                 case "Rectangle":
                 case "MyRectangle":
                     {
-                        if (myRectangle != null)
-                        {
-                            if (pointLocal.Length != 2)
-                            {
-                                shapeFactory = new RectangleFactory();
-                                shape = shapeFactory.CreateNewShape();
-                            }
-                            else
-                            {
-                                shape = myRectangle.Initialization(pointLocal, pen);
-                            }
-                        }
+                        myObject = GetObjectFromLibrary("MyRectangle");
+                        shape = myObject.Initialization(pointLocal, pen);
                         break;
                     }
 
                 case "Ellipce":
                 case "MyEllipce":
                     {
-                        if (myEllipce != null)
-                        {
-                            if (pointLocal.Length != 2)
-                            {
-                                shapeFactory = new EllipceFactory();
-                                shape = shapeFactory.CreateNewShape();
-                            }
-                            else
-                            {
-                                // shape = new MyEllipce(pointLocal, pen.Color, pen.Width);
-                                shape = myEllipce.Initialization(pointLocal, pen);
-                            }
-                        }
-                       
+                        myObject = GetObjectFromLibrary("MyEllipce");
+                        shape = myObject.Initialization(pointLocal, pen);
+
                         break;
                     }
 
                 case "Line":
                 case "MyLine":
                     {
-                        if (myLine != null)
-                        {
-                            if (pointLocal.Length != 2)
-                            {
-                                shapeFactory = new LineFactory();
-                                shape = shapeFactory.CreateNewShape();
-                            }
-                            else
-                            {
-                                shape = myLine.Initialization(pointLocal, pen);
-                            }
-                        }
+                        myObject = GetObjectFromLibrary("MyLine");
+                       // if (myObject != null)
+                        shape = myObject.Initialization(pointLocal, pen);
                         break;
                     }
 
                 case "Circle":
                 case "MyCircle":
                     {
-                        if (myCircle != null)
-                        {
-                            if (pointLocal.Length != 2)
-                            {
-                                shapeFactory = new CircleFactory();
-                                shape = shapeFactory.CreateNewShape();
-                            }
-                            else
-                            {
-                                shape = myCircle.Initialization(pointLocal, pen);
-                            }
-                        }
+                        myObject = GetObjectFromLibrary("MyCircle");
+                        shape = myObject.Initialization(pointLocal, pen);
                         break;
                     }
 
                 case "Square":
                 case "MySquare":
                     {
-                        if (mySquare != null)
-                        {
-                            if (pointLocal.Length != 2)
-                            {
-                                shapeFactory = new SquareFactory();
-                                shape = shapeFactory.CreateNewShape();
-                            }
-                            else
-                            {
-                                shape = mySquare.Initialization(pointLocal, pen);
-                            }
-                        }
+                        myObject = GetObjectFromLibrary("MySquare");
+                        shape = myObject.Initialization(pointLocal, pen);
                         break;
                     }
             }

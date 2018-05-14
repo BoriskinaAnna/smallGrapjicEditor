@@ -56,18 +56,11 @@
             // 
             this.shapeComboBox.FormattingEnabled = true;
             this.shapeComboBox.Items.AddRange(new object[] {
-            "Triangle",
-            "Rectangle",
-            "Ellipce",
-            "Line",
-            "Circle",
-            "Square",
             "Mouse"});
             this.shapeComboBox.Location = new System.Drawing.Point(299, 308);
             this.shapeComboBox.Name = "shapeComboBox";
             this.shapeComboBox.Size = new System.Drawing.Size(121, 21);
             this.shapeComboBox.TabIndex = 2;
-            this.shapeComboBox.Text = "Line";
             this.shapeComboBox.SelectedIndexChanged += new System.EventHandler(this.shapeComboBox_SelectedIndexChanged);
             this.shapeComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.shapeComboBox_KeyDown);
             // 
