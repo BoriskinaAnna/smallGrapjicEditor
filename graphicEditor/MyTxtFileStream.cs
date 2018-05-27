@@ -139,7 +139,8 @@ namespace graphicEditor
                             Lab1.pen.Color = color;
                             Lab1.pen.Width = width;
                             Lab1.shape = Lab1.CreateNewShape(shapeName, point, Lab1.pen);
-                            Lab1.AddNewShapeToList(Lab1.shape);
+                            if (Lab1.shape != null)
+                                Lab1.AddNewShapeToList(Lab1.shape);
 
                         }
                         //Redraw();

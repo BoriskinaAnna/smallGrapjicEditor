@@ -180,57 +180,10 @@ namespace graphicEditor
         {
             shape = null;
             IResizable myObject;
-            switch (shapeName)
-            {
-                case "Triangle":
-                case "MyTriangle":
-                    {
-                        myObject = GetObjectFromLibrary("MyTriangle");
-                        shape = myObject.Initialization(pointLocal, pen);
-                        break;
-                    }
-                case "Rectangle":
-                case "MyRectangle":
-                    {
-                        myObject = GetObjectFromLibrary("MyRectangle");
-                        shape = myObject.Initialization(pointLocal, pen);
-                        break;
-                    }
 
-                case "Ellipce":
-                case "MyEllipce":
-                    {
-                        myObject = GetObjectFromLibrary("MyEllipce");
-                        shape = myObject.Initialization(pointLocal, pen);
-
-                        break;
-                    }
-
-                case "Line":
-                case "MyLine":
-                    {
-                        myObject = GetObjectFromLibrary("MyLine");
-                       // if (myObject != null)
-                        shape = myObject.Initialization(pointLocal, pen);
-                        break;
-                    }
-
-                case "Circle":
-                case "MyCircle":
-                    {
-                        myObject = GetObjectFromLibrary("MyCircle");
-                        shape = myObject.Initialization(pointLocal, pen);
-                        break;
-                    }
-
-                case "Square":
-                case "MySquare":
-                    {
-                        myObject = GetObjectFromLibrary("MySquare");
-                        shape = myObject.Initialization(pointLocal, pen);
-                        break;
-                    }
-            }
+            myObject = GetObjectFromLibrary(shapeName);
+            if (myObject != null)
+                shape = myObject.Initialization(pointLocal, pen);
 
             return shape;
         }
@@ -322,7 +275,7 @@ namespace graphicEditor
             {
           
                 shape.Draw(bitmapMain, point, true);
-                if(shapeComboBox.Text == "Triangle" && point.Length != 2 || shapeComboBox.Text != "Triangle")
+                if(shapeComboBox.Text == "MyTriangle" && point.Length != 2 || shapeComboBox.Text != "MyTriangle")
                     Array.Resize(ref point, 0);
             }
         }
