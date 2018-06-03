@@ -1,0 +1,8 @@
+D:\4 сем\ооп\1\graphicEditor\MyCircle\MyCircle\obj\Debug\MyCircle.csprojResolveAssemblyReference.cache
+D:\4 сем\ооп\1\graphicEditor\MyCircle\MyCircle\obj\Debug\MyCircle.csproj.CoreCompileInputs.cache
+D:\4 сем\ооп\1\graphicEditor\MyCircle\MyCircle\bin\Debug\MyCircle.dll
+D:\4 сем\ооп\1\graphicEditor\MyCircle\MyCircle\bin\Debug\MyCircle.pdb
+D:\4 сем\ооп\1\graphicEditor\MyCircle\MyCircle\bin\Debug\Shape.dll
+D:\4 сем\ооп\1\graphicEditor\MyCircle\MyCircle\bin\Debug\Shape.pdb
+D:\4 сем\ооп\1\graphicEditor\MyCircle\MyCircle\obj\Debug\MyCircle.dll
+D:\4 сем\ооп\1\graphicEditor\MyCircle\MyCircle\obj\Debug\MyCircle.pdb

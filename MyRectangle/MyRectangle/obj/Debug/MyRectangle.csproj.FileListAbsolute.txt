@@ -1,0 +1,8 @@
+D:\4 сем\ооп\1\graphicEditor\MyRectangle\MyRectangle\bin\Debug\MyRectangle.dll
+D:\4 сем\ооп\1\graphicEditor\MyRectangle\MyRectangle\bin\Debug\MyRectangle.pdb
+D:\4 сем\ооп\1\graphicEditor\MyRectangle\MyRectangle\bin\Debug\Shape.dll
+D:\4 сем\ооп\1\graphicEditor\MyRectangle\MyRectangle\bin\Debug\Shape.pdb
+D:\4 сем\ооп\1\graphicEditor\MyRectangle\MyRectangle\obj\Debug\MyRectangle.csprojResolveAssemblyReference.cache
+D:\4 сем\ооп\1\graphicEditor\MyRectangle\MyRectangle\obj\Debug\MyRectangle.csproj.CoreCompileInputs.cache
+D:\4 сем\ооп\1\graphicEditor\MyRectangle\MyRectangle\obj\Debug\MyRectangle.dll
+D:\4 сем\ооп\1\graphicEditor\MyRectangle\MyRectangle\obj\Debug\MyRectangle.pdb

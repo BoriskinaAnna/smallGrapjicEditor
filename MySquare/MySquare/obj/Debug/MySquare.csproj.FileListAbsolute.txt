@@ -1,0 +1,8 @@
+D:\4 сем\ооп\1\graphicEditor\MySquare\MySquare\bin\Debug\MySquare.dll
+D:\4 сем\ооп\1\graphicEditor\MySquare\MySquare\bin\Debug\MySquare.pdb
+D:\4 сем\ооп\1\graphicEditor\MySquare\MySquare\bin\Debug\Shape.dll
+D:\4 сем\ооп\1\graphicEditor\MySquare\MySquare\bin\Debug\Shape.pdb
+D:\4 сем\ооп\1\graphicEditor\MySquare\MySquare\obj\Debug\MySquare.csprojResolveAssemblyReference.cache
+D:\4 сем\ооп\1\graphicEditor\MySquare\MySquare\obj\Debug\MySquare.csproj.CoreCompileInputs.cache
+D:\4 сем\ооп\1\graphicEditor\MySquare\MySquare\obj\Debug\MySquare.dll
+D:\4 сем\ооп\1\graphicEditor\MySquare\MySquare\obj\Debug\MySquare.pdb

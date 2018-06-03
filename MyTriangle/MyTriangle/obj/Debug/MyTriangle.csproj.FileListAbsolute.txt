@@ -1,0 +1,8 @@
+D:\4 сем\ооп\1\graphicEditor\MyTriangle\MyTriangle\bin\Debug\MyTriangle.dll
+D:\4 сем\ооп\1\graphicEditor\MyTriangle\MyTriangle\bin\Debug\MyTriangle.pdb
+D:\4 сем\ооп\1\graphicEditor\MyTriangle\MyTriangle\bin\Debug\Shape.dll
+D:\4 сем\ооп\1\graphicEditor\MyTriangle\MyTriangle\bin\Debug\Shape.pdb
+D:\4 сем\ооп\1\graphicEditor\MyTriangle\MyTriangle\obj\Debug\MyTriangle.csproj.CoreCompileInputs.cache
+D:\4 сем\ооп\1\graphicEditor\MyTriangle\MyTriangle\obj\Debug\MyTriangle.dll
+D:\4 сем\ооп\1\graphicEditor\MyTriangle\MyTriangle\obj\Debug\MyTriangle.pdb
+D:\4 сем\ооп\1\graphicEditor\MyTriangle\MyTriangle\obj\Debug\MyTriangle.csprojResolveAssemblyReference.cache

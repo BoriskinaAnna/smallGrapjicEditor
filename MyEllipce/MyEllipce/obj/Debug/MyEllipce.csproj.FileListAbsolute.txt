@@ -1,0 +1,8 @@
+D:\4 сем\ооп\1\graphicEditor\MyEllipce\MyEllipce\bin\Debug\MyEllipce.dll
+D:\4 сем\ооп\1\graphicEditor\MyEllipce\MyEllipce\bin\Debug\MyEllipce.pdb
+D:\4 сем\ооп\1\graphicEditor\MyEllipce\MyEllipce\bin\Debug\Shape.dll
+D:\4 сем\ооп\1\graphicEditor\MyEllipce\MyEllipce\bin\Debug\Shape.pdb
+D:\4 сем\ооп\1\graphicEditor\MyEllipce\MyEllipce\obj\Debug\MyEllipce.csproj.CoreCompileInputs.cache
+D:\4 сем\ооп\1\graphicEditor\MyEllipce\MyEllipce\obj\Debug\MyEllipce.dll
+D:\4 сем\ооп\1\graphicEditor\MyEllipce\MyEllipce\obj\Debug\MyEllipce.pdb
+D:\4 сем\ооп\1\graphicEditor\MyEllipce\MyEllipce\obj\Debug\MyEllipce.csprojResolveAssemblyReference.cache

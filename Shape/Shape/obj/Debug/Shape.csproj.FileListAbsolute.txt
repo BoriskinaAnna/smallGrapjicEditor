@@ -1,0 +1,6 @@
+D:\4 сем\ооп\1\graphicEditor\Shape\Shape\bin\Debug\Shape.dll
+D:\4 сем\ооп\1\graphicEditor\Shape\Shape\bin\Debug\Shape.pdb
+D:\4 сем\ооп\1\graphicEditor\Shape\Shape\obj\Debug\Shape.csprojResolveAssemblyReference.cache
+D:\4 сем\ооп\1\graphicEditor\Shape\Shape\obj\Debug\Shape.csproj.CoreCompileInputs.cache
+D:\4 сем\ооп\1\graphicEditor\Shape\Shape\obj\Debug\Shape.dll
+D:\4 сем\ооп\1\graphicEditor\Shape\Shape\obj\Debug\Shape.pdb

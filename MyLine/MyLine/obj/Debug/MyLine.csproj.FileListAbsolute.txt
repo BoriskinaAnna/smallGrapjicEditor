@@ -1,0 +1,8 @@
+D:\4 сем\ооп\1\graphicEditor\MyLine\MyLine\bin\Debug\MyLine.dll
+D:\4 сем\ооп\1\graphicEditor\MyLine\MyLine\bin\Debug\MyLine.pdb
+D:\4 сем\ооп\1\graphicEditor\MyLine\MyLine\bin\Debug\Shape.dll
+D:\4 сем\ооп\1\graphicEditor\MyLine\MyLine\bin\Debug\Shape.pdb
+D:\4 сем\ооп\1\graphicEditor\MyLine\MyLine\obj\Debug\MyLine.csproj.CoreCompileInputs.cache
+D:\4 сем\ооп\1\graphicEditor\MyLine\MyLine\obj\Debug\MyLine.dll
+D:\4 сем\ооп\1\graphicEditor\MyLine\MyLine\obj\Debug\MyLine.pdb
+D:\4 сем\ооп\1\graphicEditor\MyLine\MyLine\obj\Debug\MyLine.csprojResolveAssemblyReference.cache

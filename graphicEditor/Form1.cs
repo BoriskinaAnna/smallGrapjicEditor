@@ -481,6 +481,13 @@ namespace graphicEditor
         {
             MyTxtFileStream txtFileStream = MyTxtFileStream.getInstance();
             txtFileStream.Save();
+            List<Shape.Shape> list = new List<Shape.Shape>();
+            for (int i = 0; i < allShapes[0].list.Count; i++)
+            {
+                list.Add(allShapes[0].list[i]);
+            }
+            list[0].center = new Point(7, 8);
+
         }
 
         private void btnOpen_KeyDown(object sender, KeyEventArgs e)
