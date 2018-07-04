@@ -12,6 +12,7 @@ namespace graphicEditor
     class MyTxtFileStream
     {
 
+
         private static MyTxtFileStream instance;
 
         private MyTxtFileStream()
